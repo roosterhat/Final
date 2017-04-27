@@ -70,16 +70,14 @@ class TreeSortedBag(AbstractBag):
 
     def delete(self,item):
         if self.comparator(self.item,item)==0:
-            if self.hasRight():
-                curr = self.right
-                while curr.hasLeft():
-                    curr = curr.left
-                self.item = curr.item
-                curr.delete(curr.item)
-            elif self.hasLeft():
-                curr = self.left
-                while curr.hasRight():
-                    curr = curr.right
+            if self.hasLeft() or self.hasRight():
+                curr = None
+                if self.hasRight():
+                    curr = self.right
+                    while curr.hasLeft():
+                        curr = curr.left
+                elif self.hasLeft():
+                    curr = self.left
                 self.item = curr.item
                 curr.delete(curr.item)
             else:
@@ -101,4 +99,3 @@ class TreeSortedBag(AbstractBag):
         if self.hasRight():
             res += self.right.inorder()
         return res
-
