@@ -16,4 +16,3 @@ class ArraySortedSet(ArraySortedBag):
         if isinstance(set,ArrayBag):
             for i in set:
                 self.add(i)
-
