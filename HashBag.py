@@ -29,10 +29,10 @@ class HashBag(AbstractBag):
         return self._bag.__iter__()
 
     def _getNewHashCode(self, key):
-        hashcode = self.hashComparator.hash(key)
-        while self.__contains__(hashcode % self.size):
-            hashcode += 1
-        return hashcode % self.size
+        hashcode = self.hashComparator.hash(key) % self.size
+        while hashcode in self:
+            hashcode = (hashcode + 1) % self.size
+        return hashcode
 
     def get(self,key):
         if self.__contains__(key):
