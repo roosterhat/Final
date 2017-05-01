@@ -16,9 +16,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="true" project-jdk-name="Python 3.6.0 (C:\Users\ostlinja\AppData\Local\Programs\Python\Python36\python.exe)" project-jdk-type="Python SDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5.3 (C:\Users\Adriano\AppData\Local\Programs\Python\Python35\python.exe)" project-jdk-type="Python SDK" />
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
