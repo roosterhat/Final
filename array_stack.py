@@ -1,6 +1,6 @@
-from Collection.abstract_stack import AbstractStack
-from Collection.abstract_collection import AbstractCollection
-from Collection.array import Array
+from abstract_stack import AbstractStack
+from abstract_collection import AbstractCollection
+from array import Array
 
 
 class ArrayStack(AbstractStack):

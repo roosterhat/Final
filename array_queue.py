@@ -1,6 +1,6 @@
-from Collection.abstract_queue import AbstractQueue
-from Collection.abstract_collection import AbstractCollection
-from Collection.array import Array
+from abstract_queue import AbstractQueue
+from abstract_collection import AbstractCollection
+from array import Array
 
 
 class ArrayQueue(AbstractQueue):

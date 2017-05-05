@@ -1,5 +1,5 @@
-from Collection.abstract_list import AbstractList
-from Collection.linked_structure import LinkedStructure
+from abstract_list import AbstractList
+from linked_structure import LinkedStructure
 
 class LinkedList(AbstractList):
 

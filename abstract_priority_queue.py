@@ -1,4 +1,4 @@
-from Collection.abstract_queue import AbstractQueue
+from abstract_queue import AbstractQueue
 
 
 class PriorityNode:

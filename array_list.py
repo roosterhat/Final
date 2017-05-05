@@ -1,5 +1,5 @@
-from Collection.abstract_list import AbstractList
-from Collection.array import Array
+from abstract_list import AbstractList
+from array import Array
 
 class ArrayList(AbstractList):
 

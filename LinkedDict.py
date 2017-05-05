@@ -21,20 +21,3 @@ class LinkedDict(AbstractDictionary, LinkedStructure):
         if isinstance(entry, Entry):
             LinkedStructure.insert(index, entry)
 
-
-import random
-
-a = LinkedDict()
-for i in range(10):
-    a[random.randint(0, 10000)] = "test"
-
-a[1234] = "this is a test"
-
-print(a)
-print(len(a))
-print(a[1234])
-# print(1234 in a)
-del a[1234]
-print(a)
-print(len(a))
-print(a.toList())

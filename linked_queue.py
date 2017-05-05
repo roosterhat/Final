@@ -1,6 +1,6 @@
-from Collection.abstract_queue import AbstractQueue
-from Collection.abstract_collection import AbstractCollection
-from Collection.linked_structure import LinkedStructure
+from abstract_queue import AbstractQueue
+from abstract_collection import AbstractCollection
+from linked_structure import LinkedStructure
 
 
 class LinkedQueue(AbstractQueue):

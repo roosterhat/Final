@@ -1,7 +1,7 @@
-from Collection.abstract_priority_queue import AbstractPriorityQueue
-from Collection.abstract_priority_queue import PriorityNode
-from Collection.abstract_collection import AbstractCollection
-from Collection.array import Array
+from abstract_priority_queue import AbstractPriorityQueue
+from abstract_priority_queue import PriorityNode
+from abstract_collection import AbstractCollection
+from array import Array
 
 
 class ArrayPriorityQueue(AbstractPriorityQueue):

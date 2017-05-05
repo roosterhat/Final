@@ -1,6 +1,6 @@
-from Collection.abstract_stack import AbstractStack
-from Collection.abstract_collection import AbstractCollection
-from Collection.linked_structure import LinkedStructure
+from abstract_stack import AbstractStack
+from abstract_collection import AbstractCollection
+from linked_structure import LinkedStructure
 
 class LinkedStack(AbstractStack):
     def __init__(self, other = None):

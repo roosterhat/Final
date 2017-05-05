@@ -1,9 +1,8 @@
-from Collection.stack_interface import StackInterface
-from Collection.abstract_collection import AbstractCollection
+from stack_interface import StackInterface
+from abstract_collection import AbstractCollection
 
 
 class AbstractStack(StackInterface, AbstractCollection):
-
     def pop(self):
         if self.is_empty():
             raise ValueError("Stack is empty")
@@ -25,4 +24,3 @@ class AbstractStack(StackInterface, AbstractCollection):
 
     def clear(self):
         self._items.clear()
-

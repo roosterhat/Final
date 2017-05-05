@@ -1,4 +1,4 @@
-from Collection.abstract_collection import AbstractCollection
+from abstract_collection import AbstractCollection
 
 
 class Array(AbstractCollection):

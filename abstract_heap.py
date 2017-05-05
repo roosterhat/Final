@@ -1,18 +1,18 @@
-from Collection.heap_interface import heap_interface
-from Collection.abstract_collection import AbstractCollection
+from heap_interface import heap_interface
+from abstract_collection import AbstractCollection
 
 class abstract_heap(heap_interface, AbstractCollection):
 
     def pop(self):
         if self.is_empty():
-         raise Exception("AHHHHHHHHH")
+            raise Exception()
         self._size -= 1
         topItem = self._items[0]
-        bottomItem = self._items.pop(self.__len__() - 1)
+        bottomItem = self._items.pop(len(self) - 1)
         if len(self._items) == 0:
             return bottomItem
         self._items[0] = bottomItem
-        lastIndex = self.__len__() - 1
+        lastIndex = len(self) - 1
         curPos = 0
         while True:
             leftChild = 2 * curPos + 1

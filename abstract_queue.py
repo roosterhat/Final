@@ -1,5 +1,5 @@
-from Collection.queue_interface import QueueInterface
-from Collection.abstract_collection import AbstractCollection
+from queue_interface import QueueInterface
+from abstract_collection import AbstractCollection
 
 
 class AbstractQueue(QueueInterface, AbstractCollection):
