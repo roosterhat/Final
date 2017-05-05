@@ -1,33 +1,30 @@
-from AbstractCollection import AbstractCollection
+from DictionaryInterface import DictionaryInterface
 
-class AbstractDictionary(AbstractCollection):
-    def __getitem__(self, item):
-        raise NotImplementedError()
 
-    def __delitem__(self, key):
-        raise NotImplementedError()
-
+class AbstractDictionary(DictionaryInterface):
     def __setitem__(self, key, value):
-        raise NotImplementedError()
+        self.add(Entry(key, value))
 
-    def add(self,item):
-        self.insert(len(self),item)
+    def getItem(self, key):
+        for entry in self:
+            if entry.key == key:
+                return entry.item
 
-    def delete(self,key):
-        self.remove(key)
-
-    def insert(self,key,item):
-        raise NotImplementedError()
-
-    def remove(self,key):
-        raise NotImplementedError()
+    def getKey(self, item):
+        for entry in self:
+            if entry.item == item:
+                return entry.key
 
     def pop(self):
-        raise NotImplementedError()
+        val = self._data
+        self.remove(self._data)
+        return val
 
-    def index(self,key):
-        raise NotImplementedError()
 
-    def get(self,index):
-        raise NotImplementedError()
+class Entry:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
 
+    def __str__(self):
+        return "key: " + str(self.key) + ", item: " + str(self.value)

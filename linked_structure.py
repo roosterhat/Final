@@ -1,118 +1,141 @@
-from Collection.abstract_collection import AbstractCollection
-
-
-class Node:
-    def __init__(self, data, prev=None, next=None):
-        self.data = data
-        self.prev = prev
-        self.next = next
-
-    def __str__(self):
-        return str(self.data)
+from abstract_collection import AbstractCollection
 
 
 class LinkedStructure(AbstractCollection):
-    def __init__(self, other=None):
+    def __init__(self, other=None, comp=lambda x, y: x == y):
         self._head = None
+        self._data = None
         self._tail = None
+        self.comparator = comp
         AbstractCollection.__init__(self, other)
 
     def __iter__(self):
-        temp = self._head
-        while temp is not None:
-            yield temp
-            temp = temp.next
+        return self.toList().__iter__()
+
+    def __len__(self):
+        return len(self.toList())
 
     def __str__(self):
         out = "["
-        counter = 0
         for item in self:
-            if counter != 0:
-                out += ","
-            out += str(item.data)
-            counter += 1
-        out += "]"
+            out += str(item) + ","
+        out = out[:-1] + "]"
         return out
 
-    def add(self, item):
-        if self._head is None:
-            self._head = Node(item, None, None)
-            self._tail = self._head
-        else:
-            temp = Node(item, self._tail, None)
-            self._tail.next = temp
-            self._tail = temp
-        self._size += 1
-
-    def insert(self, index, value):
-        if self._size == 0:
-            self.add(value)
-        elif index == 0:
-            temp = Node(value, None, self._head)
-            self._head.prev = temp
-            self._head = temp
-            self._size += 1
-        else:
-            if index >= self._size:
-                self.add(value)
-            else:
-                for item in self:
-                    if index == 1:
-                        break
-                    index -= 1
-                temp = Node(value, item, item.next)
-                item.next.prev = temp
-                item.next = temp
-                self._size += 1
-
     def __getitem__(self, index):
-        if index >= self._size or index < 0:
-            raise IndexError("Index out of bounds")
-        else:
-            return self._getNode(index).data
-
-    def _getNode(self, index):
-        for item in self:
+        if not index >= len(self) or index < 0:
             if index == 0:
-                return item
-            index -=1
+                return self._data
+            elif self.hasTail():
+                return self._tail[index - 1]
 
     def __setitem__(self, index, value):
-        self._getNode(index).data = value
-
-    def remove(self, index):
-        if index >= self._size or index < 0:
-            raise IndexError("Index :" + index + " is out of bound")
-        else:
+        if not index >= len(self) or index < 0:
             if index == 0:
-                newHead = self._head.next
-                if newHead is not None:
-                    newHead.prev = None
-                self._head.next = None
-                self._head = newHead
-            elif index == self._size - 1:
-                newTail = self._tail.prev
-                self._tail.prev = None
-                self._tail = newTail
-                self._tail.next = None
+                self._data = value
+            elif self.hasTail():
+                self._tail[index - 1] = value
+
+    def __delitem__(self, index):
+        self.remove(index)
+
+    def __contains__(self, value):
+        if self.comparator(value, self._data):
+            return True
+        elif self.hasTail():
+            return value in self.getTail()
+        else:
+            return False
+
+    def hasTail(self):
+        return self._tail is not None
+
+    def hasHead(self):
+        return self._head is not None
+
+    def hasData(self):
+        return self._data is not None
+
+    def getHead(self):  # hehehe
+        return self._head
+
+    def getTail(self):
+        return self._tail
+
+    def setHead(self, node, set=True):
+        if isinstance(node, LinkedStructure):
+            self._head = node
+            if set:
+                node.setTail(self, set=False)
+        elif node is None:
+            self._tail = node
+
+    def setTail(self, node, set=True):
+        if isinstance(node, LinkedStructure):
+            self._tail = node
+            if set:
+                node.setHead(self, set=False)
+        elif node is None:
+            self._tail = node
+
+    def add(self, item):
+        if not self.hasData():
+            self._data = item
+        elif self.hasTail():
+            self._tail.add(item)
+        else:
+            self.setTail(LinkedStructure(item,comp=self.comparator))
+
+    def insert(self, index, value):
+        if index >= self._size:
+            self.add(value)
+        elif index == 0:
+            temp = LinkedStructure(value,comp=self.comparator)
+            self._head.setTail(temp)
+        elif self.hasTail():
+            self._tail.insert(index - 1, value)
+        else:
+            self.add(value)
+
+    def index(self, item, index=0):
+        if self.comparator(item, self._data):
+            return index
+        elif self.hasTail():
+            return self.getTail().index(item, index + 1)
+        else:
+            return -1
+
+    def remove(self, item):
+        if self.comparator(item, self._data):
+            if self.hasHead():
+                self.getHead().setTail(self._tail)
             else:
-                node = self._getNode(index)
-                node.prev.next = node.next
-                node.next.prev = node.prev
-                node.prev = None
-                node.next = None
-            self._size -= 1
+                if self.hasTail():
+                    self._data = self[1]
+                    self.setTail(self._tail.getTail())
+        elif self.hasTail():
+            self._tail.remove(item)
+
+    def toList(self):
+        res = ["{" + str(self._data) + "}"]
+        if self.hasTail():
+            return res + self.getTail().toList()
+        return res
 
     def clear(self):
+        self._data = None
         self._head = None
-        self._tail = self._head
+        self._tail = None
         self._size = 0
 
 
 if __name__ == "__main__":
     lyst = LinkedStructure([1, 2, 3, 4])
-    print(lyst.__str__())
+    print(str(lyst))
     lyst.insert(5, 100)
     print(lyst)
-    lyst.remove(2)
+    print(len(lyst))
+    lyst.remove(lyst.index(2))
+    lyst[0] = 1337
     print(lyst)
+    print(lyst[3])

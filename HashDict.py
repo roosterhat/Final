@@ -113,7 +113,8 @@ class HashDict(AbstractDictionary):
 class HashComparator:
     def __init__(self):
         self.alphabet = list(map(chr, range(ord('a'), ord('z') + 1)))
-        self.alphabet += list(map(lambda x: str(x).upper(), self.alphabet))
+        self.alphabet += list(map(str.upper, self.alphabet))
+
 
     def hash(self, key):
         prime = 11
@@ -136,3 +137,4 @@ class HashComparator:
     def compare(self, x, y):
         if isinstance(x and y, str):
             return self.hash(x) - self.hash(y)
+

@@ -1,15 +1,13 @@
-
-"""Many students asked how Abstract collection should look like. There is a sample. Feel free to 
-add any other common implementations if you like"""
-
-
 class AbstractCollection:
 
     def __init__(self, other=None):
-        self._size = 0
-        if other:
-            for item in other:
-                self.add(item)
+            self._size = 0
+            if other is not None:
+                if isinstance(other,list):
+                    for item in other:
+                        self.add(item)
+                else:
+                    self.add(other)
 
     def __len__(self):
         return self._size
@@ -43,4 +41,5 @@ class AbstractCollection:
 
     def is_empty(self):
         return self._size == 0
+
 
