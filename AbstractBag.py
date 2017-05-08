@@ -1,5 +1,6 @@
 from AbstractCollection import AbstractCollection
 
+
 class AbstractBag(AbstractCollection):
     def __len__(self):
         raise NotImplementedError()
