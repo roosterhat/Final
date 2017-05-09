@@ -11,7 +11,6 @@ def compare(x, y):
 class Node:
     def __init__(self, value=None):
         self.value = value
-        self.visited = False
         self.connections = LinkedStructure(comp=compare)
 
     def __str__(self):
@@ -69,9 +68,11 @@ class LinkedDirectedGraph(LinkedStructure):
         else:
             LinkedStructure.add(self, Node(value=node))
 
-    def resetVisited(self):
-        for n in self:
-            n.visited = False
+    def insert(self, index, node):
+        if isinstance(node, Node):
+            LinkedStructure.insert(self, index, node)
+        else:
+            LinkedStructure.insert(self, index, Node(value=node))
 
     def _getNodes(self,n1,n2):
         if not isinstance(n1 ,Node):
@@ -89,7 +90,6 @@ class LinkedDirectedGraph(LinkedStructure):
     def isReachable(self, start, end):
         start,end = self._getNodes(start,end)
         if start and end is not None:
-            self.resetVisited()
             return self.get(start).isReachable(end)
         return False
 
