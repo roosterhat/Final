@@ -116,8 +116,15 @@ class LinkedStructure(AbstractCollection):
         elif self.hasTail():
             self._tail.remove(item)
 
+    def get(self,item):
+        index = self.index(item)
+        if index>=0:
+            return self[index]
+        else:
+            return None
+
     def toList(self):
-        res = ["{" + str(self._data) + "}"]
+        res = [self._data]
         if self.hasTail():
             return res + self.getTail().toList()
         return res
