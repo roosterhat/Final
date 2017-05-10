@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from Structs.Node import Node
+from Node import Node
 
 class Node():
     def __init__(self,element,prev_node = None,next_node = None):
