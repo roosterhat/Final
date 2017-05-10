@@ -1,4 +1,4 @@
-from AbstractCollection import AbstractCollection
+from abstract_collection import AbstractCollection
 
 
 class AbstractBag(AbstractCollection):
